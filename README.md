@@ -64,3 +64,44 @@
 - Prompt Templates e placeholders
 - OutputParsing e Pydantic
 - Sumarização, utilizando map-reduce
+
+## Principais Tópicos Abordados no Projeto
+
+### Fundamentos Básicos
+
+- **Introdução ao LangChain:** Conceitos básicos e primeira integração com modelos de linguagem
+- **Integração com OpenAI:** Como usar o ChatOpenAI para interações básicas
+- **Integração com Google Gemini:** Configuração e uso do modelo Gemini via Google GenAI
+- **Templates de Prompt:** Criação de templates simples e avançados para prompts
+- **Chat Prompts:** Implementação de sistemas de conversação com templates estruturados
+
+### Chains e Processamento Avançado
+
+- **LCEL (LangChain Expression Language):** Sintaxe de pipe (|) para conectar componentes
+- **Chains Básicas:** Criação de pipelines simples de pergunta e resposta
+- **Chains Complexas:** Pipelines multi-etapas com tradução e sumarização
+- **Runnables Customizados:** Decorador @chain e RunnableLambda para funções personalizadas
+- **Text Splitters:** Divisão de textos longos em chunks para processamento
+- **Summarization Chains:** Técnicas "stuff" e "map_reduce" para sumarização de documentos
+- **Structured Output:** Extração de dados estruturados usando Pydantic models
+
+### Agentes e Tools
+
+- **Custom Tools:** Criação de ferramentas personalizadas com decorador @tool
+- **ReAct Agents:** Implementação de agentes que raciocinam e agem
+- **Agent Executors:** Orquestração de agentes com múltiplas ferramentas
+- **Prompt Hub:** Uso de prompts pré-definidos da comunidade LangChain
+
+### Gerenciamento de Memória
+
+- **Chat History:** Implementação de histórico de conversação persistente
+- **Message Memory:** Armazenamento e recuperação de mensagens em sessões
+- **Memory Trimming:** Técnicas de janela deslizante para gerenciar contexto limitado
+- **Session Management:** Gerenciamento de múltiplas sessões de conversa
+
+### Document Loaders e RAG
+
+- **Web Loaders:** Carregamento de conteúdo de páginas web
+- **PDF Loaders:** Processamento e extração de texto de documentos PDF
+- **Document Chunking:** Estratégias de divisão de documentos para processamento eficiente
+- **RAG Foundations:** Conceitos básicos para Retrieval-Augmented Generation
