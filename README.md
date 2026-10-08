@@ -105,3 +105,21 @@
 - **PDF Loaders:** Processamento e extração de texto de documentos PDF
 - **Document Chunking:** Estratégias de divisão de documentos para processamento eficiente
 - **RAG Foundations:** Conceitos básicos para Retrieval-Augmented Generation
+
+## Gerenciamento de Memória
+
+- Memória se refere a guardar o contexto e todo o conteúdo que foi informado para o modelo
+- LLMs são Stateless -> Nào guardam informação
+- "Conversas" -> Não são armazenadas no modelo
+- É necessário enviar 100% do histórico de mensagens
+
+### Histórico de Curto Prazo vs Longo Prazo
+
+- Curto Prazo: Memória que é utilizada durante uma transação/conversa/processamento
+  - Pode ser armazenada temporáriamente (banco de dados de cache, memória do sevidor),
+  - Pode ser armazenada em um banco de dados vetorial
+- Longo Prazo: Histórico da "conversa"
+  - Deve ser armazenada em um banco de dados vetorial
+  - Possibilidade de restaurar o conteúdo anterior para continuar de onde parou
+  - Ler o histórico para ter contexto para continuar a "conversa"
+  - Sumarização (resumo da conversa) como estratégia para economizar tokens
