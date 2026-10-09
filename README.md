@@ -123,3 +123,74 @@
   - Possibilidade de restaurar o conteúdo anterior para continuar de onde parou
   - Ler o histórico para ter contexto para continuar a "conversa"
   - Sumarização (resumo da conversa) como estratégia para economizar tokens
+
+## Document Loaders & RAG
+
+- Document Loaders: Carregam documentos de diferentes fontes (PDF, HTML, CSV, JSON, Sites, etc)
+- RAG: Retrieval-Augmented Generation
+- RAG é uma técnica que combina a geração de texto com a recuperação de informações relevantes de uma base de dados ou documentos. Isso permite que o modelo de linguagem produza respostas mais precisas e informadas, utilizando dados externos como referência.
+- Exemplo de RAG:
+  - Usuário pergunta: "Qual é a capital da França?"
+  - O sistema RAG busca em uma base de dados ou documentos e encontra a informação correta: "A capital da França é Paris."
+  - O modelo de linguagem então gera uma resposta informada: "A capital da França é Paris."
+  - Isso é especialmente útil em cenários onde o modelo de linguagem precisa fornecer respostas baseadas em informações atualizadas ou específicas que não estão presentes em seu treinamento inicial.
+- RAG é amplamente utilizado em sistemas de perguntas e respostas, assistentes virtuais, chatbots e outras aplicações que requerem acesso a informações externas para fornecer respostas precisas e contextualmente relevantes.
+- Exemplo de RAG com LangChain:
+  - Carregar documentos usando Document Loaders
+  - Criar embeddings dos documentos carregados
+  - Armazenar os embeddings em um banco de dados vetorial
+  - Quando o usuário faz uma pergunta, buscar os documentos mais relevantes no banco de dados vetorial
+  - Passar os documentos relevantes para o modelo de linguagem para gerar uma resposta informada
+- Exemplo de código para RAG com LangChain:
+
+```python
+from langchain.document_loaders import PyPDFLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.vectorstores import FAISS
+
+# Carregar o documento PDF
+loader = PyPDFLoader("documento.pdf")
+document = loader.load()
+
+# Dividir o documento em chunks
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+chunks = text_splitter.split_documents(document)
+
+# Criar embeddings para cada chunk e armazená-los em um banco de dados vetorial
+vectorstore = FAISS.from_documents(chunks, embedding_model)
+```
+
+## Chunking de Documentos
+
+- Chunking é o processo de dividir documentos longos em partes menores (chunks) para facilitar o processamento e a análise.
+- Cada chunk pode ser processado individualmente, permitindo que o modelo de linguagem lide com grandes volumes de texto sem perder contexto ou informações importantes.
+- Técnicas de chunking:
+  - **Fixed Size Chunking:** Dividir o documento em chunks de tamanho fixo (ex: 500 tokens)
+  - **Semantic Chunking:** Dividir o documento com base em significado ou tópicos, utilizando técnicas de NLP para identificar limites naturais no texto
+  - **Overlap Chunking:** Criar chunks que se sobrepõem parcialmente, garantindo que informações importantes não sejam perdidas entre os chunks
+- Vantagens do chunking:
+  - Facilita o processamento de grandes documentos
+  - Permite a aplicação de técnicas de RAG, onde cada chunk pode ser indexado e recuperado individualmente
+  - Melhora a eficiência do modelo de linguagem ao lidar com grandes volumes de texto, evitando a perda de contexto e informações importantes
+  - Permite a sumarização de documentos longos, onde cada chunk pode ser resumido individualmente antes de gerar um resumo final do documento completo
+  - Permite a criação de embeddings para cada chunk, facilitando a busca por similaridade em bancos de dados vetoriais
+- Exemplo de chunking com LangChain:
+  - Carregar um documento PDF usando um Document Loader
+  - Dividir o documento em chunks utilizando um Text Splitter
+  - Criar embeddings para cada chunk e armazená-los em um banco de dados vetorial
+  - Quando o usuário faz uma pergunta, buscar os chunks mais relevantes no banco de dados vetorial
+  - Passar os chunks relevantes para o modelo de linguagem para gerar uma resposta informada
+- Exemplo de código para chunking com LangChain:
+
+```python
+from langchain.document_loaders import PyPDFLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+
+# Carregar o documento PDF
+loader = PyPDFLoader("documento.pdf")
+document = loader.load()
+
+# Dividir o documento em chunks
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+chunks = text_splitter.split_documents(document)
+```
