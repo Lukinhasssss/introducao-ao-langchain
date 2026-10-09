@@ -1,3 +1,5 @@
+import os
+
 from dotenv import load_dotenv
 from langchain.tools import tool
 from langchain_classic.agents import AgentExecutor, create_react_agent
@@ -33,7 +35,7 @@ def web_search_mock(query: str) -> str:
     return "I don't know the capital of that country."
 
 
-llm = ChatOpenRouter(model="openrouter/free", disable_streaming=True)
+llm = ChatOpenRouter(model=os.getenv("OPENROUTER_BASE_MODEL","openrouter/free"), disable_streaming=True)
 tools = [calculator, web_search_mock]
 
 prompt = PromptTemplate.from_template(

@@ -1,3 +1,4 @@
+import os
 from typing import Any
 
 from dotenv import load_dotenv
@@ -13,7 +14,7 @@ from langgraph.runtime import Runtime
 load_dotenv()
 
 chat_model = init_chat_model(
-  model="openrouter/free",
+  model=os.getenv("OPENROUTER_BASE_MODEL","openrouter/free"),
   model_provider="openrouter",
   temperature=0,
 )

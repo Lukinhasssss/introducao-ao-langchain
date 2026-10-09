@@ -1,3 +1,5 @@
+import os
+
 from dotenv import load_dotenv
 from langchain.agents import create_agent
 from langchain.agents.middleware import ModelCallLimitMiddleware
@@ -34,7 +36,7 @@ def web_search_mock(query: str) -> str:
     return "I don't know the capital of that country."
 
 llm = init_chat_model(
-  model="openrouter/free",
+  model=os.getenv("OPENROUTER_BASE_MODEL","openrouter/free"),
   model_provider="openrouter",
   temperature=0,
   disable_streaming=True

@@ -1,3 +1,4 @@
+import os
 from typing import Callable, cast
 
 from dotenv import load_dotenv
@@ -29,7 +30,7 @@ def trim_context(
 
 
 chat_model = init_chat_model(
-  model="openrouter/free",
+  model=os.getenv("OPENROUTER_BASE_MODEL","openrouter/free"),
   model_provider="openrouter",
   temperature=0,
 )

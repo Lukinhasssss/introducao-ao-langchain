@@ -1,4 +1,5 @@
 import math
+import os
 
 from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
@@ -12,7 +13,7 @@ def square_root(input: dict) -> dict:
   x = input["x"]
   return {"square_result": math.sqrt(x)}
 
-model = init_chat_model(model="openrouter/free", model_provider="openrouter", temperature=0)
+model = init_chat_model(model=os.getenv("OPENROUTER_BASE_MODEL","openrouter/free"), model_provider="openrouter", temperature=0)
 
 question_template = PromptTemplate(
   input_variables=["square_result"],

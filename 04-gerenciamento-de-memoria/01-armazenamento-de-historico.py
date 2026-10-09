@@ -1,3 +1,5 @@
+import os
+
 from dotenv import load_dotenv
 from langchain.agents import create_agent
 from langchain.chat_models import init_chat_model
@@ -7,7 +9,7 @@ from langgraph.checkpoint.memory import InMemorySaver
 load_dotenv()
 
 chat_model = init_chat_model(
-  model="openrouter/free",
+  model=os.getenv("OPENROUTER_BASE_MODEL","openrouter/free"),
   model_provider="openrouter",
   temperature=0,
 )

@@ -1,3 +1,5 @@
+import os
+
 from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
 from langchain_classic.chains.summarize import load_summarize_chain
@@ -5,7 +7,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 load_dotenv()
 
-llm = init_chat_model(model="openrouter/free", model_provider="openrouter", temperature=0)
+llm = init_chat_model(model=os.getenv("OPENROUTER_BASE_MODEL","openrouter/free"), model_provider="openrouter", temperature=0)
 
 long_text = """
 Dawn threads a pale gold through the alley of glass.

@@ -1,3 +1,5 @@
+import os
+
 from dotenv import load_dotenv
 from langchain.tools import tool
 from langchain_classic import hub
@@ -34,7 +36,7 @@ def web_search_mock(query: str) -> str:
     return "I don't know the capital of that country."
 
 
-llm = ChatOpenRouter(model="openrouter/free", disable_streaming=True)
+llm = ChatOpenRouter(model=os.getenv("OPENROUTER_BASE_MODEL","openrouter/free"), disable_streaming=True)
 tools = [web_search_mock]
 
 prompt = hub.pull("hwchase17/react")

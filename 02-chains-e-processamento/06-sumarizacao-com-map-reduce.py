@@ -1,3 +1,4 @@
+import os
 # Sequence descreve uma sequência de documentos recebida pela função abaixo.
 from collections.abc import Sequence
 from typing import Any
@@ -21,7 +22,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 load_dotenv()
 
 # temperature=0 reduz a variação das respostas; o modelo é acessado via OpenRouter.
-llm = init_chat_model(model="openrouter/free", model_provider="openrouter", temperature=0)
+llm = init_chat_model(model=os.getenv("OPENROUTER_BASE_MODEL","openrouter/free"), model_provider="openrouter", temperature=0)
 
 # Texto de exemplo que será dividido e resumido. O conteúdo pode ser substituído
 # por qualquer texto que se queira processar.
